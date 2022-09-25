@@ -23,7 +23,17 @@ div.list{
 
     font-family:cursive;
     font-size: 20px;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    gap: 10px;
+    border-top: 1px solid #dfdfdf;
+    padding: 10px;
+    list-style-type: none;
 
+
+}
+div > *{
+    border: 2px solid rgb(17, 128, 183);
 }
 .button{
         background-color: white;
