@@ -1,11 +1,14 @@
-
-
-
-
-
-
-
-
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+      .then(function (registration) { })
+      .catch(function (error) {
+        console.log('Register Failed:', error);
+      });
+  }
+  else {
+    console.log('Service workers are not supported.');
+  }
+  
 document.getElementById("btnadd").onclick = function input(){
     var input_title = document.getElementById("song_title").value
     var input_artist= document.getElementById("artist_name").value

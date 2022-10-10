@@ -2,7 +2,7 @@
     "short_name": "Music App",
     "name": "My Music App",
     "description": "An app to keep a list of all your favourite music.",
-    "start_url": "/",
+    "start_url": "https://music-app-whyi.vercel.app/",
     "id": "/",
     "theme_color": "crimson",
     "background_color": "gray",
