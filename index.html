@@ -2,7 +2,7 @@
 <html>
     <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lab1 PWA</title>
+<title>Lab4 PWA</title>
 <link rel="stylesheet" href="/style.css">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -13,29 +13,32 @@
 <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-    <img src = "/icons/android-chrome-192x192.png" width = "92" height="92">
-    <h1>My Music App</h1>
-    <h3>Add a new song</h3>
+    <!-- <img src = "/icons/android-chrome-192x192.png" width = "92" height="92"> -->
+    <h3>Notifications</h3>
+    <!-- <h3>Add a new song</h3> -->
 
     <h4 id="alert" class="alert">Fill all values</h4>
     
-    <form>
+    <form id="dispNoti">
+        <button type="button" id="notification">Send Notifications</button>
+        <br><br>
+
         <label for="song title">Title:</label><br>
-        <input type="text" id="song_title" name="title"><br>
+        <input type="text" id="title" name="title"><br>
 
-        <label for="artist"> Body </label><br>
-        <input type="text" id="artist_name" name="artist">
+        <label for="artist"> Body: </label><br>
+        <input type="text" id="body" name="artist">
         <br>
         <br>
 
-        <button type="button" id="btnadd" >Show</button>
+        <button type="button" id="btnadd"> Show </button>
     </form>
      
-      <h3 class="listofsongs">List of Songs</h3>
+      <!-- <h3 class="listofsongs">List of Songs</h3>
     
     <div id="List" class="list">
        <div></div>
-    </div>
+    </div> -->
       
     <script src="/script.js"></script>
 

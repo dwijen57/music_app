@@ -61,84 +61,42 @@ self.addEventListener('activate', function (event) {
  * On Fetch Event
  * Triggered when the service worker retrieves an asset
  */
-self.addEventListener('fetch', function (event) {
+self.addEventListener('notifClick',  (event) => {
 
-  // // Cache strategy: Cache Only
-  // event.respondWith(
-  //   caches.open(cacheName)
-  //     .then(function (cache) {
-  //       return cache.match(event.request)
-  //         .then(function (response) {
-  //           return response;
-  //         })
-  //     })
-  // );
+  
+  const action = event.action;
+  const notification = event.notification;
+  const data = notification.data;
+  console.log("Data:", action);
+  const options = {
+    includeUncontrolled: true,
+    type: "all",
+  };
 
-  // // Cache strategy: Cache Only (alternative)
-  // event.respondWith(
-  //   caches.open(cacheName)
-  //     .then(function (cache) {
-  //       return cache.match(event.request)
-  //     })
-  // );
+  switch (action) {
+    case "agree":
+      clients.matchAll(options).then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage("So we both agree on that!");
+        });
+      });
+      break;
 
-  // // Cache strategy: Network Only
-  // event.respondWith(
-  //   fetch(event.request)
-  //     .then(function (response) {
-  //       return response
-  //     })
-  // );
+    case "disagree":
+      clients.matchAll(options).then((clients) => {
+        clients.forEach((clients) => {
+          clients.postMessage("Let's agree to disagree.");
+        });
+      });
+      break;
 
-  // // Cache strategy: Network Only (alternative)
-  // event.respondWith(
-  //   fetch(event.request)
-  // );
+    case "":
+      console.log("Clicked on the notification.");
+      const openPromise = clients.openWindow("/index.html");
+      event.waitUntil(openPromise);
+      break;
+  }
 
-  // Cache strategy: Cache with Network Fallback Example
-  event.respondWith(
-    caches.open(cacheName)
-      .then(function (cache) {
-        return cache.match(event.request)
-          .then(function (response) {
-            return response || fetch(event.request);
-          })
-      })
-  );
-
-  // // Cache strategy: Network with Cache Fallback
-  // event.respondWith(
-  //   fetch(event.request)
-  //     .catch(function () {
-  //       return caches.open(cacheName)
-  //         .then(function (cache) {
-  //           return cache.match(event.request)
-  //         })
-  //     })
-  // );
-
-  // Cache strategy: Stale While Revalidate
-  // event.respondWith(
-  //   caches.open(cacheName)
-  //     .then(function (cache) {
-  //       return cache.match(event.request)
-  //         .then(function (cachedResponse) {
-  //           const fetchedResponse = fetch(event.request)
-  //             .then(function (networkResponse) {
-  //               cache.put(
-  //                 event.request,
-  //                 networkResponse.clone()
-  //               );
-
-  //               return networkResponse;
-  //             })
-  //             .catch(function () {
-  //               return cache.match('/offline.html');
-  //             });
-
-  //           return cachedResponse || fetchedResponse;
-  //         })
-  //     })
-  // );
+  
 
 });
