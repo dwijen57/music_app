@@ -96,7 +96,25 @@ self.addEventListener('notifClick',  (event) => {
       event.waitUntil(openPromise);
       break;
   }
+});
 
-  
+self.addEventListener("fetch", function (event) {
+  // Cache strategy: Stale While Revalidate
+  event.respondWith(
+    caches.open(cacheName).then(function (cache) {
+      return cache.match(event.request).then(function (cachedResponse) {
+        const fetchedResponse = fetch(event.request)
+          .then(function (networkResponse) {
+            cache.put(event.request, networkResponse.clone());
 
+            return networkResponse;
+          })
+          .catch(function () {
+            return cache.match("/index.html");
+          });
+
+        return cachedResponse || fetchedResponse;
+      });
+    })
+  );
 });

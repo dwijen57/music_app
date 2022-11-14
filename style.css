@@ -40,3 +40,9 @@ div > *{
         color: black;
         border: 2px solid #4CAF50;
 }
+
+.dispNoti{
+
+    display: block;
+
+}

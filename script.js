@@ -9,26 +9,26 @@ if ('serviceWorker' in navigator) {
     console.log('Service workers are not supported.');
   }
   
-  const notifBtn = document.getElementById("btnadd");
+  const notifBtn = document.getElementById("notification");
   if ("Notification" in window && "serviceWorker" in navigator)
   {
     notifBtn.addEventListener("click", () =>{
       switch (Notification.permission) {
         case "denied":
-          document.getElementById("btnadd").style.display = "none";
+          document.getElementById("notification").style.display = "none";
           document.getElementById("dispNoti").style.display = "none";
           break;
   
+        case "granted":
+          document.getElementById("notification").style.display = "none";
+          document.getElementById("dispNoti").style.display = "block";
+          break;
+
         case "default":
-          document.getElementById("btnadd").onclick = () => {
+          document.getElementById("notification").onclick = () => {
             Notification.requestPermission();
           };
   
-          break;
-  
-        case "granted":
-          document.getElementById("btnadd").style.display = "none";
-          document.getElementById("dispNoti").style.display = "block";
           break;
       }
       navigator.serviceWorker.addEventListener("message", (message) => {
@@ -37,13 +37,13 @@ if ('serviceWorker' in navigator) {
       });
 
       if (Notification.permission == "granted") {
-        document.getElementById("btnadd").style.display = "none";
+        document.getElementById("notification").style.display = "none";
         document.getElementById("dispNoti").style.display = "block";
       } else if (Notification.permission == "denied") {
-        document.getElementById("btnadd").style.display = "none";
+        document.getElementById("notification").style.display = "none";
         document.getElementById("dispNoti").style.display = "none";
       } else if (Notification.permission == "default") {
-        document.getElementById("btnadd").style.display = "block";
+        document.getElementById("notification").style.display = "block";
         document.getElementById("dispNoti").style.display = "none";
       }
 
@@ -52,13 +52,13 @@ if ('serviceWorker' in navigator) {
   }
 
   if (Notification.permission == "granted") {
-    document.getElementById("btnadd").style.display = "none";
+    document.getElementById("notification").style.display = "none";
     document.getElementById("dispNoti").style.display = "block";
   } else if (Notification.permission == "denied") {
-    document.getElementById("btnadd").style.display = "none";
+    document.getElementById("notification").style.display = "none";
     document.getElementById("dispNoti").style.display = "none";
   } else if (Notification.permission == "default") {
-    document.getElementById("btnadd").style.display = "block";
+    document.getElementById("notification").style.display = "block";
     document.getElementById("dispNoti").style.display = "none";
   }
   
